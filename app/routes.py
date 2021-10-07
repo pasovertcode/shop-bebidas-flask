@@ -1,7 +1,7 @@
 from app import app
 
 from flask import render_template
-
+from app.controller import user_controller
 # indice
 @app.route('/')
 def index():
@@ -25,6 +25,8 @@ def wishlist():
 # store
 @app.route("/store")
 def store():
+    for data in user_controller.obtenerProductos():
+        print(data)
     # load database here and send it to html
     return render_template('public/store.html')
 

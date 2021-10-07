@@ -10,22 +10,23 @@ def index():
 # about us
 @app.route("/about")
 def about():
-    return "about"
+    return render_template('public/about.html')
 
 # menu
 @app.route("/menu")
 def menu():
-    return "menu"
+    return render_template('public/menu.html')
 
 # wish-List
 @app.route("/wishlist")
 def wishlist():
-    return "Wish List"
+    return render_template('public/wishlist.html')
 
 # store
 @app.route("/store")
 def store():
-    return "Store"
+    # load database here and send it to html
+    return render_template('public/store.html')
 
 # sign in
 @app.route("/login")

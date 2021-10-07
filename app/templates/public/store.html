@@ -8,6 +8,7 @@
         {% if product[5] == 'active' %}
             <article>
                 <form action="" method="GET">
+                    <img class="img-producto" src="{{url_for('static', filename='img/productos/')}}{{product[2]}}.png"
                     <h3>{{product[1]}}</h3>
                     <p>{{product[3]}}</p>
                     <p>{{product[4]}}</p>

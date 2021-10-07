@@ -106,6 +106,10 @@ a {
   color: white;
 }
 
+.img-producto{
+    width: 240px;
+}
+
 .navbar {
   padding: 20px 20px;
   display: flex;

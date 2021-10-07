@@ -25,10 +25,9 @@ def wishlist():
 # store
 @app.route("/store")
 def store():
-    for data in user_controller.obtenerProductos():
-        print(data)
+    data = user_controller.obtenerProductos()
     # load database here and send it to html
-    return render_template('public/store.html')
+    return render_template('public/store.html', datos = data)
 
 # sign in
 @app.route("/login")

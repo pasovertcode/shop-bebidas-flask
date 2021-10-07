@@ -2,6 +2,18 @@
 {% block title %} Store {% endblock %}
 
 {% block body %}
+    <h2>Lista de productos:</h2>
 
-
+    {% for product in datos %}
+        {% if product[5] == 'active' %}
+            <article>
+                <form action="" method="GET">
+                    <h3>{{product[1]}}</h3>
+                    <p>{{product[3]}}</p>
+                    <p>{{product[4]}}</p>
+                    <button type="submit" name="buy" value="{{product[2]}}">Comprar</button>
+                </form>
+            </article>
+        {% endif %}
+    {% endfor %} 
 {% endblock %}

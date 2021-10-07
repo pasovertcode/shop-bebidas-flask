@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %} {% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+      
+    <header>
+      <form id="demo-2" action="" method="GET">
+        <input type="search" placeholder="Search" name="search" />
+      </form>
+      
+      <a href="{{ url_for('sign_in') }}" class="signin">SIGN IN</a>
+        
+    </header>
+   
+    <center>
+      <section class="navbar">
+        <button class="nav-button" onclick="accion()">Menu</button>
+        <a href="{{url_for('about')}}" class="nav-enlace1 desaparece"
+          >About Us</a
+        >
+        <a class="nav-enlace2 desaparece">☆</a>
+        <a href="{{url_for('menu')}}" class="nav-enlace1 desaparece">Menu</a>
+        <a class="nav-enlace2 desaparece">☆</a>
+        <img
+          class="logo desaparece"
+          id="logo"
+          src="{{url_for('static', filename='img/logo.png')}}"
+        />
+        <a class="nav-enlace2 desaparece">☆</a>
+        <a href="{{url_for('wishlist')}}" class="nav-enlace1 desaparece"
+          >Wishlist</a
+        >
+        <a class="nav-enlace2 desaparece">☆</a>
+        <a href="{{url_for('store')}}" class="nav-enlace1 desaparece">store</a>
+      </section>
+    </center>
+    <script>
+      function accion() {
+        var ancla = document.getElementsByClassName("nav-enlace1");
+        for (var i = 0; i < ancla.length; i++) {
+          ancla[i].classList.toggle("desaparece");
+        }
+      }
+    </script>
+    {% block body%}
+    {% endblock %}
+    <footer></footer>
+  </body>
+</html>

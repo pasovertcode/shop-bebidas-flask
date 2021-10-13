@@ -34,13 +34,13 @@ def store():
 @app.route("/login", methods=['GET', 'POST'])
 def sign_in():
     form = user_controller.LoginForm()
-    if request.method == "POST":
+    if form.validate_on_submit():
         username = request.form['username']
         password = request.form['password']
         if user_controller.LoginUsuario(username, password):
             print(session)
             return redirect(url_for('index'))
-        form.username.erros.append("Usuario o contraseña incorrectos.")
+        form.username.errors.append("datos incorrectos.")
     return render_template('public/login.html', form=form)
 
 @app.route("/logout")

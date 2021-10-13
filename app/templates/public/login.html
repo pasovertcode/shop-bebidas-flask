@@ -9,13 +9,21 @@
             <div class="login-form">
                 <div class="sign-in-htm">
                     <form action="{{ url_for('sign_in') }}" method="POST">
+                        
+                        {% for field, errors in form.errors.items() %}
+                            <div class="alert alert-danger">
+                            {{ form[field].label }}: {{ ', '.join(errors) }}
+                            </div>
+                        {% endfor %}
+                        {{ form.csrf_token }}
                     <div class="group">
-                        <label for="user" class="label" >Username</label>
+                        {{form.username.label(class="label")}}
                         <input id="user" type="text" name="username" class="input">
                     </div>
                     <div class="group">
-                        <label for="pass" class="label" >Password</label>
-                        <input id="pass" type="password" name="password" class="input" data-type="password">
+                        {{form.password.label(class="label")}}
+                        {{form.password(class="input", id="pass")}}
+                     
                     </div>
                     <div class="group">
                         <input id="check" type="checkbox" class="check" checked>

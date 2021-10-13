@@ -28,6 +28,6 @@ def LoginUsuario(user, password):
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Usuario', validators=[Required()])
-    password = PasswordField('Contraseña', validators=[Required()])
+    username = StringField('Username', validators=[Required()])
+    password = PasswordField('Password', validators=[Required()])
     submit = SubmitField('Sign In')

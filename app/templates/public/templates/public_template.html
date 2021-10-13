@@ -6,6 +6,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <link 
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/login.css')}}"
+      />
   </head>
   <body>
       
@@ -14,7 +18,15 @@
         <input type="search" placeholder="Search" name="search" />
       </form>
       
-      <a href="{{ url_for('sign_in') }}" class="signin">SIGN IN</a>
+      {% if session['username']%}
+      <section>
+        <span>Usuario: {{session['username']}}</span>
+        <a href="{{ url_for('logout') }}" class="signin">LOG OUT</a>
+      </section>
+      {% else%}
+        <a href="{{ url_for('sign_in') }}" class="signin">SIGN IN</a>
+      {% endif%}
+      
         
     </header>
    

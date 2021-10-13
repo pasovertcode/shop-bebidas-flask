@@ -1,0 +1,24 @@
+{% extends "public/templates/public_template.html" %}
+{% block title %} Search {% endblock %}
+
+{% block body %}
+    <h2>Articulos encontrados:</h2>
+    {% if data|length <= 0 %}
+        <h3> Not Found </h3>
+    {% else %}
+    {% for product in data %}
+        {% if product[5] == 'active' %}
+            <article>
+                <form action="" method="GET">
+                    <img class="img-producto" src="{{url_for('static', filename='img/productos/')}}{{product[2]}}.png"/>
+                    <h3>{{product[1]}}</h3>
+                    <p>{{product[3]}}</p>
+                    <p>{{product[4]}}</p>
+                    <button type="submit" name="buy" value="{{product[2]}}">Comprar</button>
+                </form>
+            </article>
+        {% endif %}
+    {% endfor %} 
+
+    {% endif %}
+{% endblock %}

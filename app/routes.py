@@ -3,6 +3,7 @@ from app import app
 
 from flask import render_template, request, url_for, session
 from app.controller import user_controller
+from app.controller import product_controller
 # indice
 @app.route('/')
 def index():
@@ -38,7 +39,6 @@ def sign_in():
         username = request.form['username']
         password = request.form['password']
         if user_controller.LoginUsuario(username, password):
-            print(session)
             return redirect(url_for('index'))
         form.username.errors.append("datos incorrectos.")
     return render_template('public/login.html', form=form)
@@ -49,3 +49,12 @@ def logout():
     session.pop('id')
     session.pop('type')
     return redirect(url_for('sign_in'))
+
+@app.route("/search", methods=['GET'])
+def search():
+    if request.method == 'GET':
+        if request.args.get('value') != None and request.args.get('value') != "" and request.args != 'value' :
+            datasearch = request.args.get('value')
+            encontrados = product_controller.buscarProductos(datasearch)
+            return render_template('public/search.html', data=encontrados)
+    return "<h1> Error 404 </h1>"

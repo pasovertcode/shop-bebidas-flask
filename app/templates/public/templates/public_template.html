@@ -14,12 +14,19 @@
   <body>
       
     <header>
-      <form id="demo-2" action="" method="GET">
-        <input type="search" placeholder="Search" name="search" />
+      <form id="demo-2" action="{{ url_for('search') }}" method="GET">
+        <input type="search" placeholder="Search" name="value" />
       </form>
       
       {% if session['username']%}
       <section>
+        <a href="{{ url_for('user_profile') }}">
+          <input type="button" value="User Profile" class ="user-profile"/>
+        </a>
+
+
+
+        
         <span>Usuario: {{session['username']}}</span>
         <a href="{{ url_for('logout') }}" class="signin">LOG OUT</a>
       </section>

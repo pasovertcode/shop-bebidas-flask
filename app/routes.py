@@ -48,6 +48,7 @@ def logout():
     session.pop('username')
     session.pop('id')
     session.pop('type')
+    session.pop('logged_in', None)
     return redirect(url_for('sign_in'))
 
 @app.route("/search", methods=['GET'])
@@ -57,4 +58,4 @@ def search():
             datasearch = request.args.get('value')
             encontrados = product_controller.buscarProductos(datasearch)
             return render_template('public/search.html', data=encontrados)
-    return "<h1> Error 404 </h1>"
+    return render_template('public/error.html', error = "Error 404 not found")

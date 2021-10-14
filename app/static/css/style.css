@@ -6,11 +6,28 @@
 body {
   background-color: #1D2021;
   font-family: Blue_North;
+  position: relative;
 }
 
 input {
 	outline: none;
     
+}
+
+
+
+div.container{
+  width: auto;
+  height: auto;
+  position: relative;
+  margin: 2em 5em 2em 5em;
+  top: 10%;
+  border: solid 2px white;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  box-shadow: 1px 1px 1px white;
+  
+
 }
 input[type=search] {
 	-webkit-appearance: textfield;

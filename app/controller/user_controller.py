@@ -20,6 +20,7 @@ def LoginUsuario(user, password):
     dbuser = cursor.fetchone()
     if dbuser != None:
         if password == dbuser[3]:
+            session["logged_in"] = True
             session["id"] = dbuser[0]
             session["username"] = dbuser[2]
             session["type"] = dbuser[1]

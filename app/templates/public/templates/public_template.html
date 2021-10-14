@@ -46,11 +46,13 @@
         <a class="nav-enlace2 desaparece">☆</a>
         <a href="{{url_for('menu')}}" class="nav-enlace1 desaparece">Menu</a>
         <a class="nav-enlace2 desaparece">☆</a>
-        <img
-          class="logo desaparece"
-          id="logo"
-          src="{{url_for('static', filename='img/logo_1.png')}}"
-        />
+        <a href="{{ url_for('index') }}">
+          <img
+            class="logo desaparece"
+            id="logo"
+            src="{{url_for('static', filename='img/logo_1.png')}}"
+          />
+        </a>
         <a class="nav-enlace2 desaparece">☆</a>
         <a href="{{url_for('wishlist')}}" class="nav-enlace1 desaparece"
           >Wishlist</a
@@ -67,8 +69,10 @@
         }
       }
     </script>
-    {% block body%}
-    {% endblock %}
+    <div class="container" style="background-color: #fdf3d5;">
+      {% block body%}
+      {% endblock %}
+    </div>
     <footer></footer>
   </body>
 </html>

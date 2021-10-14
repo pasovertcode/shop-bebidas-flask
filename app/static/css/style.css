@@ -14,7 +14,12 @@ input {
     
 }
 
-
+img.img{
+  padding: 1em 0em 1em 1em;
+  width: 49%;
+  height: 510px;
+  
+}
 
 div.container{
   width: auto;
@@ -22,7 +27,7 @@ div.container{
   position: relative;
   margin: 2em 5em 2em 5em;
   top: 10%;
-  border: solid 2px white;
+  border: solid 1px white;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   box-shadow: 1px 1px 1px white;

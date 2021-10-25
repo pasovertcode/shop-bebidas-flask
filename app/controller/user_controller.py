@@ -3,6 +3,7 @@ from flask import session, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Required
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 def obtenerProductos():
@@ -12,12 +13,11 @@ def obtenerProductos():
     cursor.execute(sql)
     return cursor.fetchall()
 
+
 def LoginUsuario(user, password):
     db = database.get_db()
     cursor = db.cursor()
-    sql = "SELECT * from usuarios WHERE username = '{}'".format(user)
-    cursor.execute(sql)
-    dbuser = cursor.fetchone()
+    dbuser = cursor.execute("SELECT * from usuarios WHERE username = :user", {"user": user}).fetchone()
     if dbuser != None:
         if password == dbuser[3]:
             session["logged_in"] = True

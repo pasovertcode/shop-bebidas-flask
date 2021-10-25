@@ -2,10 +2,65 @@
 {% block title %} Log In {% endblock %}
 
 {% block body %}
+<section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-8 col-lg-7 col-xl-6">
+          <img src="{{url_for('static', filename='img/logo_1.png')}}" class="img-fluid" alt="Phone image">
+        </div>
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <br>
+          <form action="{{ url_for('sign_in') }}" method="POST">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                {{ form.csrf_token }}
+                {{form.username(class="form-control")}}
+                {{form.username.label(class="form-label")}}
+            </div>
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                {{form.password(class="form-control", id="form1Example23")}}
+                {{form.password.label(class="form-label")}}
+            </div>
+  
+            <div class="d-flex justify-content-around align-items-center mb-4">
+              <!-- Checkbox -->
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="form1Example3"
+                  checked
+                />
+                <label style="color: white"class="form-check-label" for="form1Example3"> Remember me </label>
+              </div>
+              <a href="#!" style="color: white" >Forgot password?</a>
+            </div>
+  
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+  
+            <div class="divider d-flex align-items-center my-4">
+              <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+            </div>
+  
+            <a class="btn btn-lg btn-danger btn-block"  href="#!" role="button">
+              <i class="reg re-register-r me-2"></i>Register
+            </a>
+            
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
     <div class="login-wrap">
         <div class="login-html">
-            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+            <!-- <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label> -->
             <div class="login-form">
                 <div class="sign-in-htm">
                     <form action="{{ url_for('sign_in') }}" method="POST">
@@ -32,12 +87,13 @@
                     <div class="group">
                         <input type="submit" class="button" value="Sign In">
                     </div>
-                </form>
+                    </form>
                     <div class="hr"></div>
                     <div class="foot-lnk">
                         <a href="#forgot" id="forgot-password">Forgot Password?</a>
                     </div>
                 </div>
+
                 <div class="sign-up-htm">
                     <div class="group">
                         <label for="user" class="label">Username</label>

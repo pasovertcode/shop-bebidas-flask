@@ -125,6 +125,15 @@ a {
   font-size: 20px;
 }
 
+.info-user{
+  position: absolute;
+  left: 74%;
+  color: #FFF5D7;
+  text-decoration: none;
+  display: inline-block;
+  padding-top: 0.5em;
+}
+
 .signin {
   position: absolute;
   left: 90%;
@@ -192,7 +201,7 @@ html {
   }
 }
 .container{
-  background-color: #fdf3d5;
+  background-color: transparent;
 }
 .container-2{
   background-color: #fdf3d5;

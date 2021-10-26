@@ -10,7 +10,10 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
@@ -21,20 +24,25 @@
       />
   </head>
   <body>
-      
+    
     <header>
       <form id="demo-2" action="{{ url_for('search') }}" method="GET">
         <input type="search" placeholder="Search" name="value" />
       </form>
 
       {% if session['username'] %}
-      <section>
+      <section class="info-user">
+        
+
+        <span class="text-light">Usuario: {{session['username']}}</span>
         <a href="{{url_for('user_profile')}}">
-          <input type="button" value="User Profile" class ="user-profile"/>
+          <input type="button" value="User Profile" class ="btn btn-primary"/>
         </a>
 
-        <span>Usuario: {{session['username']}}</span>
-        <a href="{{ url_for('logout') }}" class="signin">LOG OUT</a>
+        
+        <a href="{{ url_for('logout') }}" >
+          <input type="button" class="btn btn-danger" value="LOG OUT">
+        </a>
       </section>
       {% else%}
         <a href="{{ url_for('sign_in') }}" class="signin">SIGN IN</a>

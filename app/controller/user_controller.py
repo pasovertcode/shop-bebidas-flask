@@ -13,6 +13,11 @@ def obtenerProductos():
     cursor.execute(sql)
     return cursor.fetchall()
 
+def obtenerDataUsuario():
+    db = database.get_db()
+    cursor = db.cursor()
+    datauser = cursor.execute("SELECT * from usuarios WHERE username = :user", {"user": session['username']}).fetchone()
+    return datauser
 
 def LoginUsuario(user, password):
     db = database.get_db()

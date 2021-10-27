@@ -7,8 +7,20 @@
 // Scripts
 // 
 
-window.addEventListener('DOMContentLoaded', event => {
 
+var table = new DataTable('#dataTableProduct', {
+    // options
+});
+$('#dataTableProduct tbody').on( 'click', 'tr', function () {
+    console.log( table.row( this ).data() );
+    var datarow = table.row( this ).data();
+    datarow[0] = 100;
+    table.row(this).data(datarow).draw();
+} );
+
+
+window.addEventListener('DOMContentLoaded', event => {
+    
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
@@ -23,4 +35,33 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     }
 
+    const a_user = document.body.querySelector('#form-user');
+    const a_product = document.body.querySelector('#form-product');
+    const form_user = document.body.querySelector('#user-control-form');
+    const form_product = document.body.querySelector('#product-control-form');
+    if (a_user)
+    {
+        a_user.addEventListener('click', event => {
+            event.preventDefault();
+            form_product.style.display = "none";
+            form_user.style.display = "block";
+
+        });
+    }
+    if (a_product)
+    {
+        a_product.addEventListener('click', event => {
+            event.preventDefault();
+            form_user.style.display = "none";
+            form_product.style.display = "block";
+        });
+
+    }
+
+
 });
+
+
+
+
+

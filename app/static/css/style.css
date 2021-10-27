@@ -124,6 +124,13 @@ input::-webkit-input-placeholder {
 a {
   font-size: 20px;
 }
+#dataTableProduct_filter label input{
+  color: white;
+  background-color: black;
+}
+#icon-logo{
+  font-size: 120px;
+}
 
 .info-user{
   position: absolute;

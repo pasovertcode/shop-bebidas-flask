@@ -6,16 +6,18 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
-          <div class="sidebar-heading border-bottom bg-light p-4">General</div>
+          <div class="sidebar-heading border-bottom bg-light p-4 align-self-center"><i class="icon ion-md-settings mr-2"></i>  General</div>
           <div class="list-group list-group-flush">
-              <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Usuario</a>
+            
+              <a id="form-user" class="list-group-item list-group-item-action list-group-item-light p-2 " href="#!"> <i class="icon ion-md-person mr-2"></i>  Usuario</a>
               {%if session['type'] == 1 %}
               
                 <div class="sidebar-heading border-bottom bg-light p-4">ADMIN</div>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Productos</a>
+                
+                <a id="form-product" class="list-group-item list-group-item-action list-group-item-light p-2" href="#!"><i class="icon ion-md-pricetag mr-2"></i>Productos</a>
               {% elif session['type'] == 2 %}
               <div class="sidebar-heading border-bottom bg-light p-4">SUPER ADMIN</div>
-              <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Productos</a>
+              <a id="form-product" class="list-group-item list-group-item-action list-group-item-light p-2" href="#!"><i class="icon ion-md-pricetag mr-2"></i>Productos</a>
               {% endif %}
 
           </div>
@@ -27,18 +29,95 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <div class="container-fluid d-flex">
                 <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <p class="justify-content-center">Configuracion</p>
             </div>
         </nav>
         <!-- Page content-->
         <div class="container-fluid bg-white">
-            <h1 class="mt-4">Usuario</h1>
-            <p>Esta es una muestra la configuracion del usuario</p>
-            <p>
-                Aqui se le mostrar todo la informacion del usuario
-                
-            </p>
+          <!-- USER -->
+          <section id="user-control-form">
+            <div class="container d-flex justify-content-center">
+              <div class="row">
+              <h1 class="mt-4">Configuracion de Usuario</h1>
+              <div class="col-lg-12">
+                <div class="d-flex justify-content-center">
+
+                  <i class="icon ion-md-contact" id="icon-logo" size="large"></i>
+                </div>
+
+              </div>
+              <form action="" id="user-form" method="POST" role="form" style="display:block;">
+                  <div class="form-group">
+                    <label for="inputexample" class="form-label">Username:</label>
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" value="{{ user_data[2] }}" >
+									</div>
+                  <div class="form-group">
+                    <label for="inputexample" class="form-label">Correo:</label>
+                    <input type="email" name="email" id="e-mail" tabindex="2" class="form-control" value="{{ user_data[6] }}" >
+                  </div>
+                  <div class="form-group">
+                    <label for="inputexample" class="form-label">Contraseña:</label>
+                    <input type="password" name="password" id="pass" tabindex="3" class="form-control" value="{{ user_data[3] }}" >
+                  </div>
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-5">
+                      <input type="submit" name="user-update" id="user-update" tabindex="4" class="form-control btb btn-login" value="Aplicar">
+                      
+                    </div>
+                    <div class="col-5">
+                      <input type="submit" name="user-update" id="user-update" tabindex="4" class="form-control btb btn-login" value="RESET">
+                      
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+
+           <!-- PRODUCTOS -->
+           <section id = "product-control-form" style="display: none;" >
+             <div class="container">
+               <div class="row">
+                 <div class="col-12">
+                   <h1 class="mt-4">Configuracion de Productos</h1>
+                 </div>
+               </div>
+               <div class="row">
+                  <div class="col-12">
+                    <div class="table-responsive">
+                      <table id="dataTableProduct" class="table table-bordered table-striped table-sm mb-0" cellspacing ="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">CODIGO</th>
+                            <th scope="col">INFORMACION</th>
+                            <th scope="col">PRECIO</th>
+                            <th scope="col">ESTADO</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for product in product_data %}
+                            <tr>
+                              <td>{{product[0]}}</td>
+                              <td>{{product[1]}}</td>
+                              <td>{{product[2]}}</td>
+                              <td>{{product[3]}}</td>
+                              <td>{{product[4]}}</td>
+                              <td>{{product[5]}}</td>
+                            </tr>
+                          {% endfor %}
+                         
+                        </tbody>
+                      </table>
+                      
+                    </div>
+                  </div>
+               </div>
+             </div>
+           </section>
+
+           
         </div>
     </div>
   </div>

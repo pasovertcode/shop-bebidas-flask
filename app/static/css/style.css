@@ -124,7 +124,7 @@ input::-webkit-input-placeholder {
 a {
   font-size: 20px;
 }
-#dataTableProduct_filter label input{
+#dataTableProduct_filter label input, #dataTableUsers_filter label input{
   color: white;
   background-color: black;
 }

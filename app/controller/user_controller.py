@@ -1,7 +1,7 @@
 from app import database
 from flask import session, request
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, SelectField, TextAreaField
 from wtforms.validators import Required
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -13,6 +13,12 @@ def obtenerProductos():
     cursor.execute(sql)
     return cursor.fetchall()
 
+def obtenerUsersData():
+    db = database.get_db()
+    cursor = db.cursor()
+    users_data = cursor.execute("SELECT * from usuarios").fetchall()
+    return users_data
+    
 def obtenerDataUsuario():
     db = database.get_db()
     cursor = db.cursor()
@@ -37,3 +43,22 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[Required()])
     password = PasswordField('Password', validators=[Required()])
     submit = SubmitField('Sign In')
+
+class ProductAddForm(FlaskForm):
+   
+    nombre = StringField('NOMBRE', validators=[Required()])
+    codigo = StringField('CODIGO', validators=[Required()])
+    info = TextAreaField('INFORMACION', validators=[Required()])
+    precio = IntegerField('PRECIO', validators=[Required()])
+    estado = SelectField('ESTADO', choices=[('active', 'activo'),('deactive', 'desactivado')])
+    submit_add_product = SubmitField('Agregar')
+class ProductForm(FlaskForm):
+    ID = StringField('ID', validators=[Required()])
+    nombre = StringField('NOMBRE', validators=[Required()])
+    codigo = StringField('CODIGO', validators=[Required()])
+    info = TextAreaField('INFORMACION', validators=[Required()])
+    precio = IntegerField('PRECIO', validators=[Required()])
+    estado = SelectField('ESTADO', choices=[('active', 'activo'),('deactive', 'desactivado')])
+    submit_update_product = SubmitField('Actualizar')
+    submit_del_product = SubmitField('Eliminar')
+    

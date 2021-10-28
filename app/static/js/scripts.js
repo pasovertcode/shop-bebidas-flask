@@ -51,6 +51,9 @@ window.addEventListener('DOMContentLoaded', event => {
 
     const a_user = document.body.querySelector('#form-user');
     const a_product = document.body.querySelector('#form-product');
+    const a_users = document.body.querySelector('#form-users');
+
+    const form_users = document.body.querySelector('#users-control-form');
     const form_user = document.body.querySelector('#user-control-form');
     const form_product = document.body.querySelector('#product-control-form');
     if (a_user)
@@ -58,18 +61,35 @@ window.addEventListener('DOMContentLoaded', event => {
         a_user.addEventListener('click', event => {
             event.preventDefault();
             form_product.style.display = "none";
+            form_users.style.display = "none";
             form_user.style.display = "block";
-
+            
         });
     }
     if (a_product)
     {
         a_product.addEventListener('click', event => {
             event.preventDefault();
+            
             form_user.style.display = "none";
+            form_users.style.display = "none";
             form_product.style.display = "block";
         });
+        
+    }
+    
+    if (a_users)
+    {
+        
+        a_users.addEventListener('click', event => {
+        event.preventDefault();
+        
+        form_user.style.display = "none";
+        form_users.style.display = "block";
+        form_product.style.display = "none";
+        });
 
+        $('#dataTableUsers').DataTable();
     }
 
 

@@ -12,10 +12,24 @@ var table = new DataTable('#dataTableProduct', {
     // options
 });
 $('#dataTableProduct tbody').on( 'click', 'tr', function () {
-    console.log( table.row( this ).data() );
+    console.log( table.row( this ).data() );    
     var datarow = table.row( this ).data();
-    datarow[0] = 100;
-    table.row(this).data(datarow).draw();
+    $('#product-id').val(datarow[0]);
+    $('#product-name').val(datarow[1]);
+    $('#product-code').val(datarow[2]);
+    $('#product-info').val(datarow[3]);
+    $('#product-price').val(datarow[4]);
+    if (datarow[5] == 'active')
+    {
+        $("#modal-form-select option[value='active']").attr('selected', true);
+    }
+    else
+    {
+        $("#modal-form-select option[value='deactive']").attr('selected', true);
+    }
+    
+    $('#exampleModal').modal('show');
+
 } );
 
 

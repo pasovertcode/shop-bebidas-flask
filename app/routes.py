@@ -32,6 +32,13 @@ def store():
     # load database here and send it to html
     return render_template('public/store.html', datos = data)
 
+
+#sign up
+@app.route("/logup", methods=['GET', 'POST'])
+def sign_up():
+    if request.method == 'POST':
+        pass
+
 # sign in
 @app.route("/login", methods=['GET', 'POST'])
 def sign_in():
@@ -42,6 +49,14 @@ def sign_in():
         if user_controller.LoginUsuario(username, password):
             return redirect(url_for('index'))
         form.username.errors.append("datos incorrectos.")
+    elif request.method == 'POST':
+        if request.form['submit'] == "add-user":
+            user_data = {
+                "username": request.form['user-add-name'],
+                "password": request.form['user-add-password'],
+                "email": request.form['user-add-email']
+            }
+            user_controller.registerUser(user_data)
     return render_template('public/login.html', form=form)
 
 @app.route("/logout")

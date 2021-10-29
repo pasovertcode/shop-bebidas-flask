@@ -9,7 +9,22 @@ def user_profile():
     # if session is on, verify what type of user is and get template of .
     if session.get('logged_in') == True:
         data = user_controller.obtenerDataUsuario()
-        if session['type'] == 1:
+        
+
+        if session['type'] == 0:
+            if request.method == 'POST':
+                if request.form['submit'] == 'normal-user-update':
+                    data_user = {
+                        "email": request.form['email'],
+                        "password": request.form['password']
+                    }
+                    if str(data_user['password']).strip() == '':
+                        user_controller.updateNormalUser(data_user, False)
+                    else:
+                        user_controller.updateNormalUser(data_user, True)
+                    
+                return redirect(url_for('user_profile'))
+        elif session['type'] == 1:
             form_product = user_controller.ProductForm()
             if request.method == 'POST':
                 if request.form['submit'] == 'add-product':
@@ -39,6 +54,32 @@ def user_profile():
                     product_controller.actualizarProducto(form_product.ID.data, params)
                 elif request.form['submit'] == 'del-product':
                     product_controller.eliminarProducto(form_product.ID.data)
+                elif request.form['submit'] == 'user-update':
+                    user_data = {
+                        "user-type": request.form['user-type'],
+                        "user-name": request.form['user-name'],
+                        "user-password": request.form['user-password'],
+                        "user-state": request.form['user-state'],
+                        "user-email": request.form['user-email']
+                    }
+                    username = request.form['p-username']
+                    if str(user_data['user-password']).strip() == '':
+                        user_controller.actualizarUsuario(username, user_data, False)
+                    else:
+                        user_controller.actualizarUsuario(username, user_data, True)
+
+                elif request.form['submit'] == 'user-delete':
+                    username = request.form['p-username']
+                    user_controller.borrarUsuario(username)
+                elif request.form['submit'] == 'add-user':
+                    user_data = {
+                        "user-type": request.form['user-add-type'],
+                        "user-name": request.form['user-add-name'],
+                        "user-password": request.form['user-add-password'],
+                        "user-state": request.form['user-add-state'],
+                        "user-email": request.form['user-add-email']
+                    }
+                    user_controller.agregarUsuario(user_data)
                 return redirect(url_for('user_profile'))
             
             data_product = product_controller.obtenerProductos()
@@ -51,7 +92,9 @@ def user_profile():
             , users_data = data_users
             , product_data = data_product
             , form_product = form_product)
-         
+        
+        
+
         return render_template('public/user-profile.html', user_data=data) 
     
     return render_template('public/error.html', error = "Error 404 not found")

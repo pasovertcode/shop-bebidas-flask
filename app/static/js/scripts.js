@@ -12,6 +12,10 @@
 
 
 window.addEventListener('DOMContentLoaded', event => {
+
+    
+
+    
     
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
@@ -97,7 +101,8 @@ window.addEventListener('DOMContentLoaded', event => {
     $('#dataTableUsers tbody').on( 'click', 'tr', function () {
         var datarow = user_table.row( this ).data();
         $('#user-name').val(datarow[2]);
-        if (datarow[4] == 'activo')
+        $('#p-username').val(datarow[2]);
+        if (datarow[4] == 'active')
         {
             $("#user-state option[value='active']").attr('selected', true);
         }
@@ -110,7 +115,7 @@ window.addEventListener('DOMContentLoaded', event => {
             $("#user-type option[value='0']").attr('selected', true);
         } else if (datarow[1] == '1'){
             $("#user-type option[value='1']").attr('selected', true);
-        } else{
+        } else if (datarow[1] == '2'){
             $("#user-type option[value='2']").attr('selected', true);
         }
         $('#UserModal').modal('show');

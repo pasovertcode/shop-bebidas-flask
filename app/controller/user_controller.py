@@ -29,7 +29,7 @@ def actualizarUsuario(username, data_user, do):
             estado_usuario = :state, email_usuario = :email WHERE username = :pusername
             """, {"type": data_user['user-type'], 
             "username": data_user['user-name'], 
-            "password": data_user['user-password'],
+            "password": generate_password_hash(data_user['user-password']),
             "state": data_user['user-state'],
             "email": data_user['user-email'],
             "pusername": username
@@ -68,7 +68,7 @@ def LoginUsuario(user, password):
     cursor = db.cursor()
     dbuser = cursor.execute("SELECT * from usuarios WHERE username = :user", {"user": user}).fetchone()
     if dbuser != None:
-        if password == dbuser[3]:
+        if check_password_hash(dbuser[3], password):
             session["logged_in"] = True
             session["id"] = dbuser[0]
             session["username"] = dbuser[2]
@@ -84,7 +84,7 @@ def updateNormalUser(data_user, do):
         UPDATE usuarios SET email_usuario = :email, password_user_hash = :password
         WHERE username = :username
             """, {"email": data_user['email'],
-          "password": data_user['password'],
+          "password": generate_password_hash(data_user['password']),
           "username": session['username']})
     else:
         cursor.execute("""
@@ -117,7 +117,7 @@ def agregarUsuario(user_data):
      """, {
          "type": user_data['user-type'],
          "username": user_data['user-name'],
-         "password": user_data['user-password'],
+         "password": generate_password_hash(user_data['user-password']),
          "state": user_data['user-state'],
          "email": user_data['user-email']
      }
@@ -144,7 +144,7 @@ def registerUser(user_data):
             )
      """, {
          "username": user_data['username'],
-         "password": user_data['password'],
+         "password": generate_password_hash(user_data['password']),
          "email": user_data['email']
      }
     )

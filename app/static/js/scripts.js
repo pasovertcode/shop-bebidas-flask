@@ -8,29 +8,7 @@
 // 
 
 
-var table = new DataTable('#dataTableProduct', {
-    // options
-});
-$('#dataTableProduct tbody').on( 'click', 'tr', function () {
-    console.log( table.row( this ).data() );    
-    var datarow = table.row( this ).data();
-    $('#product-id').val(datarow[0]);
-    $('#product-name').val(datarow[1]);
-    $('#product-code').val(datarow[2]);
-    $('#product-info').val(datarow[3]);
-    $('#product-price').val(datarow[4]);
-    if (datarow[5] == 'active')
-    {
-        $("#modal-form-select option[value='active']").attr('selected', true);
-    }
-    else
-    {
-        $("#modal-form-select option[value='deactive']").attr('selected', true);
-    }
-    
-    $('#exampleModal').modal('show');
 
-} );
 
 
 window.addEventListener('DOMContentLoaded', event => {
@@ -60,8 +38,8 @@ window.addEventListener('DOMContentLoaded', event => {
     {
         a_user.addEventListener('click', event => {
             event.preventDefault();
-            form_product.style.display = "none";
-            form_users.style.display = "none";
+            if (a_product) form_product.style.display = "none";
+            if (a_users) form_users.style.display = "none";
             form_user.style.display = "block";
             
         });
@@ -72,10 +50,33 @@ window.addEventListener('DOMContentLoaded', event => {
             event.preventDefault();
             
             form_user.style.display = "none";
-            form_users.style.display = "none";
+            if (a_users) form_users.style.display = "none";
             form_product.style.display = "block";
         });
         
+        var product_table = new DataTable('#dataTableProduct', {
+            // options
+        });
+        $('#dataTableProduct tbody').on( 'click', 'tr', function () {
+            console.log( product_table.row( this ).data() );    
+            var datarow = product_table.row( this ).data();
+            $('#product-id').val(datarow[0]);
+            $('#product-name').val(datarow[1]);
+            $('#product-code').val(datarow[2]);
+            $('#product-info').val(datarow[3]);
+            $('#product-price').val(datarow[4]);
+            if (datarow[5] == 'active')
+            {
+                $("#modal-form-select option[value='active']").attr('selected', true);
+            }
+            else
+            {
+                $("#modal-form-select option[value='deactive']").attr('selected', true);
+            }
+            
+            $('#exampleModal').modal('show');
+            
+        } );
     }
     
     if (a_users)
@@ -87,10 +88,35 @@ window.addEventListener('DOMContentLoaded', event => {
         form_user.style.display = "none";
         form_users.style.display = "block";
         form_product.style.display = "none";
-        });
-
-        $('#dataTableUsers').DataTable();
-    }
+    });
+    
+    var user_table = new DataTable('#dataTableUsers', {
+        // options
+    });
+    
+    $('#dataTableUsers tbody').on( 'click', 'tr', function () {
+        var datarow = user_table.row( this ).data();
+        $('#user-name').val(datarow[2]);
+        if (datarow[4] == 'activo')
+        {
+            $("#user-state option[value='active']").attr('selected', true);
+        }
+        else
+        {
+            $("#user-state option[value='deactive']").attr('selected', true);
+        }
+        $('#user-email').val(datarow[5]);
+        if (datarow[1] == '0'){
+            $("#user-type option[value='0']").attr('selected', true);
+        } else if (datarow[1] == '1'){
+            $("#user-type option[value='1']").attr('selected', true);
+        } else{
+            $("#user-type option[value='2']").attr('selected', true);
+        }
+        $('#UserModal').modal('show');
+        
+    });
+}
 
 
 });

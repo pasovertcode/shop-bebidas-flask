@@ -18,6 +18,33 @@ CREATE TABLE productos (
 );
 
 CREATE TABLE ventas (
-    id_venta bigint PRIMARY KEY AUTOINCREMENT,
-    tipo_venta 
-):
+    id_venta              INTEGER       PRIMARY KEY AUTOINCREMENT,
+    codigo_venta          VARCHAR (255) NOT NULL,
+    metodo_pago_venta     VARCHAR (255) NOT NULL,
+    codigo_producto_venta VARCHAR (255) REFERENCES productos (codigo_producto) 
+                                        NOT NULL,
+    usuario_venta         VARCHAR (255) REFERENCES usuarios (username) 
+                                        NOT NULL
+);
+CREATE TABLE wishlist (
+    id_wishlist     INTEGER       PRIMARY KEY AUTOINCREMENT,
+    codigo_producto VARCHAR (255) REFERENCES productos (codigo_producto) 
+                                  NOT NULL,
+    usuario         VARCHAR (255) REFERENCES usuarios (username) 
+                                  NOT NULL
+);
+CREATE TABLE comentarios (
+    id_comentario INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_venta      INTEGER REFERENCES ventas (id_venta),
+    valoracion    INT     NOT NULL
+                          DEFAULT (0) 
+);
+CREATE TABLE Log_Action_User (
+    id_log      INTEGER       PRIMARY KEY AUTOINCREMENT
+                              NOT NULL,
+    username    VARCHAR (255) REFERENCES usuarios (username) 
+                              NOT NULL,
+    action_log  VARCHAR (255) NOT NULL,
+    fecha_hora  DATETIME      NOT NULL,
+    details_log TEXT          NOT NULL
+);

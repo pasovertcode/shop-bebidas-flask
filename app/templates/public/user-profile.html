@@ -141,7 +141,7 @@ del usuario {% endblock %} {% block body %}
           </div>
           <br />
         </section>
-
+        {% if session['type'] >= 1 %}
         <!-- PRODUCTOS -->
         <section id="product-control-form" style="display: none;">
           <div class="container">
@@ -199,7 +199,185 @@ del usuario {% endblock %} {% block body %}
         </div>
         <br />
       </section>
+
+      <!-- PRODUCT MODAL -->
       
+      <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Producto</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form
+            action="{{ url_for('user_profile')}}"
+            method="POST"
+            id="form-product"
+          >
+            <div class="modal-body">
+              {{ form_product.csrf_token }}
+              <div class="form-group">
+                <label for="product-id" class="col-form-label">ID:</label>
+                {{form_product.ID(class="form-control", id="product-id")}}
+              </div>
+              <div class="form-group">
+                <label for="product-name" class="col-form-label"
+                  >Nombre:</label
+                >
+                {{form_product.nombre(class="form-control",
+                id="product-name")}}
+              </div>
+              <div class="form-group">
+                <label for="product-code" class="col-form-label"
+                  >CODIGO:</label
+                >
+                {{form_product.codigo(class="form-control",
+                id="product-code")}}
+              </div>
+              <div class="form-group">
+                <label for="product-info" class="col-form-label"
+                  >INFORMACION:</label
+                >
+                {{form_product.info(class="form-control",rows="3",
+                id="product-info")}}
+              </div>
+              <div class="form-group">
+                <label for="product-price" class="col-form-label"
+                  >PRECIO:</label>
+                {{form_product.precio(class="form-control",
+                id="product-price")}}
+              </div>
+              <div class="form-group">
+                <label for="product-state" class="col-form-label"
+                  >ESTADO:</label>
+                {{form_product.estado(id="modal-form-select",
+                class="form-control form-control-lg")}}
+              </div>
+            </div>
+            
+            <div class="modal-footer d-flex justify-content-around bd-highlight">
+              <div class="bd-highlight">
+                <button class="btn btn-danger" type="submit" name="submit" value="del-product">Eliminar</button>
+              </div>
+              <div class="bd-highlight">
+                <div class="btn">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal">
+                    Close
+                  </button>
+                </div>
+              </div>
+              <div class="bd-highlight">
+                <button class="btn btn-primary" type="submit" name="submit" value="update-product">Actualizar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL ADD PRODUCT -->
+    <div
+      class="modal fade"
+      id="addProductModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Producto</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form
+            action="{{ url_for('user_profile')}}"
+            method="POST"
+            id="form-add-product"
+          >
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="product-name" class="col-form-label"
+                  >Nombre:</label>
+                {{form_product.nombre(class="form-control",
+                id="add-product-name")}}
+              </div>
+              <div class="form-group">
+                <label for="product-code" class="col-form-label"
+                  >CODIGO:</label
+                >
+                {{form_product.codigo(class="form-control",
+                id="add-product-code")}}
+              </div>
+              <div class="form-group">
+                <label for="product-info" class="col-form-label"
+                  >INFORMACION:</label
+                >
+                {{form_product.info(class="form-control",rows="3",
+                id="add-product-info")}}
+              </div>
+              <div class="form-group">
+                <label for="product-price" class="col-form-label"
+                  >PRECIO:</label
+                >
+                {{form_product.precio(class="form-control",
+                id="add-product-price")}}
+              </div>
+              <div class="form-group">
+                <label for="product-state" class="col-form-label"
+                  >ESTADO:</label
+                >
+                {{form_product.estado(id="add-modal-form-select",
+                class="form-control form-control-lg")}}
+              </div>
+            </div>
+            <div class="modal-footer d-flex">
+              <div class="btn align-self-start">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+
+              <button class="btn btn-primary" type="submit" name="submit" value="add-product">Agregar</button>
+              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+      {% endif %}
+
+      {% if session['type'] == 2 %}
       <!-- USUARIOS -->
       <section id="users-control-form" style="display: none;">
         <div class="container">
@@ -250,7 +428,7 @@ del usuario {% endblock %} {% block body %}
           type="button"
           class="btn btn-primary"
           data-toggle="modal"
-          data-target="#addProductModal"
+          data-target="#addUserModal"
           >
           Agregar Usuario
         </button>
@@ -258,159 +436,69 @@ del usuario {% endblock %} {% block body %}
         <br/>
       </section>
       
+      <!-- MODAL USER FORM -->
       
-      
-      <!-- Button trigger modal -->
-      
-        <div
-          class="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Producto</h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form
-                action="{{ url_for('user_profile')}}"
-                method="POST"
-                id="form-product"
+      <div
+        class="modal fade"
+        id="UserModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
               >
-                <div class="modal-body">
-                  {{ form_product.csrf_token }}
-                  <div class="form-group">
-                    <label for="product-id" class="col-form-label">ID:</label>
-                    {{form_product.ID(class="form-control", id="product-id")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="product-name" class="col-form-label"
-                      >Nombre:</label
-                    >
-                    {{form_product.nombre(class="form-control",
-                    id="product-name")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="product-code" class="col-form-label"
-                      >CODIGO:</label
-                    >
-                    {{form_product.codigo(class="form-control",
-                    id="product-code")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="product-info" class="col-form-label"
-                      >INFORMACION:</label
-                    >
-                    {{form_product.info(class="form-control",rows="3",
-                    id="product-info")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="product-price" class="col-form-label"
-                      >PRECIO:</label>
-                    {{form_product.precio(class="form-control",
-                    id="product-price")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="product-state" class="col-form-label"
-                      >ESTADO:</label>
-                    {{form_product.estado(id="modal-form-select",
-                    class="form-control form-control-lg")}}
-                  </div>
-                </div>
-                <div class="modal-footer d-flex">
-                  <button class="btn btn-primary" type="submit" name="submit" value="del-product">Eliminar</button>
-                  <div class="btn align-self-start">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-dismiss="modal"
-                      >
-                      Close
-                    </button>
-                  </div>
-                  <button class="btn btn-primary" type="submit" name="submit" value="update-product">Actualizar</button>
-                </div>
-              </form>
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-          </div>
-        </div>
-
-        <!-- MODAL ADD PRODUCT -->
-        <div
-          class="modal fade"
-          id="addProductModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Producto</h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form
-                action="{{ url_for('user_profile')}}"
-                method="POST"
-                id="form-add-product"
-              >
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label for="product-name" class="col-form-label"
-                      >Nombre:</label>
-                    {{form_product.nombre(class="form-control",
-                    id="add-product-name")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="product-code" class="col-form-label"
-                      >CODIGO:</label
-                    >
-                    {{form_product.codigo(class="form-control",
-                    id="add-product-code")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="product-info" class="col-form-label"
-                      >INFORMACION:</label
-                    >
-                    {{form_product.info(class="form-control",rows="3",
-                    id="add-product-info")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="product-price" class="col-form-label"
-                      >PRECIO:</label
-                    >
-                    {{form_product.precio(class="form-control",
-                    id="add-product-price")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="product-state" class="col-form-label"
-                      >ESTADO:</label
-                    >
-                    {{form_product.estado(id="add-modal-form-select",
-                    class="form-control form-control-lg")}}
-                  </div>
+            <form
+              action="{{ url_for('user_profile')}}"
+              method="POST"
+              id="form-user"
+            >
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="user-tipo" class="col-form-label">TIPO:</label>
+                  <select name="user-type" id="user-type" class="form-select">
+                    <option value="0" selected>NORMAL</option>
+                    <option value="1">ADMIN</option>
+                    <option value="2">SUPER-ADMIN</option>
+                  </select>
                 </div>
-                <div class="modal-footer d-flex">
-                  <div class="btn align-self-start">
+                <div class="form-group">
+                  <label for="User-name" class="col-form-label">Username:</label>
+                  <input type="text" class="form-control" id="user-name" name="user-name">  
+                </div>
+                <div class="form-group">
+                    <label for="user-password" class="col-form-label">Password:</label>
+                    <input type="text" class="form-control" id="user-password" name="user-password">
+                </div>
+                <div class="form-group">
+                  <label for="user-state" class="col-form-label">Estado:</label>
+                  <select name="user-state" id="user-state" class="form-select">
+                    <option value="active" selected>ACTIVO</option>
+                    <option value="deactive">DESACTIVADO</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="user-email" class="col-form-label">EMAIL:</label>
+                  <input type="email" class="form-control" id="user-email">
+                </div>
+              </div>
+              <div class="modal-footer d-flex justify-content-around bd-highlight">
+                <div class="hd-highlight">
+                  <button class="btn btn-danger" type="submit" name="submit" value="user-delete">Eliminar</button>
+                </div>
+                <div class="hd-highlight">
+                  <div class="btn">
                     <button
                       type="button"
                       class="btn btn-secondary"
@@ -419,19 +507,101 @@ del usuario {% endblock %} {% block body %}
                       Close
                     </button>
                   </div>
-
-                  <button class="btn btn-primary" type="submit" name="submit" value="add-product">Agregar</button>
                   
                 </div>
-              </form>
-            </div>
+                <div class="hd-highlight">
+                  <button class="btn btn-primary" type="submit" name="submit" value="user-update">Actualizar</button>
+                  
+                </div>
+
+                
+              </div>
+            </form>
           </div>
         </div>
+      </div>
 
-        <!-- MODAL USER FORM -->
-        
-        
-        
+      <!-- MODAL ADD USER -->
+      
+      <div
+        class="modal fade"
+        id="addUserModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form
+              action="{{ url_for('user_profile')}}"
+              method="POST"
+              id="form-add-product"
+            >
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="User-name" class="col-form-label">Username:</label>
+                <input type="text" class="form-control" id="user-name" name="user-add-name">  
+                </div>
+                <div class="form-group">
+                  <label for="user-password" class="col-form-label">Password:</label>
+                  <input type="text" class="form-control" id="user-password" name="user-add-password">
+              </div>
+              <div class="form-group">
+                <label for="user-state" class="col-form-label">Estado:</label>
+                <select name="user-add-state" id="user-add-state" class="form-select">
+                  <option value="active" selected>ACTIVO</option>
+                  <option value="deactive">DESACTIVADO</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="user-email" class="col-form-label">EMAIL:</label>
+                <input type="email" class="form-control" id="user-email" name="user-add-email">
+              </div>
+              <div class="form-group">
+                <label for="user-add-tipo" class="col-form-label">TIPO:</label>
+                <select name="user-add-type" id="user-add-type" class="form-select">
+                  <option value="0" selected>NORMAL</option>
+                  <option value="1">ADMIN</option>
+                  <option value="2">SUPER-ADMIN</option>
+                </select>
+              </div>
+            </div>
+              <div class="modal-footer d-flex">
+                <div class="btn align-self-start">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+
+                <button class="btn btn-primary" type="submit" name="submit" value="add-user">Agregar</button>
+                
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      {% endif %}
+      
+      
+      
+
         
         <!-- <div class="modal-body">
              <div class="container-fluid">
